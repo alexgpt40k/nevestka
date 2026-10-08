@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="theme-color" content="#0E2A33" />
+    <title>Невестка</title>
+    <!-- Заставка видна сразу, до загрузки скрипта: без неё медленная сеть выглядит как белый экран. -->
+    <style>html,body{color:#f4ebdd;background:#0e2a33;height:100%;margin:0}#splash{flex-direction:column;justify-content:center;align-items:center;gap:12px;font-family:Georgia,Times New Roman,serif;display:flex;position:fixed;top:0;bottom:0;left:0;right:0}#splash b{color:#f3dfa2;font-size:44px;font-weight:400}#splash span{color:#9bb6bc;font-family:-apple-system,Segoe UI,Roboto,sans-serif;font-size:14px}#splash pre{white-space:pre-wrap;color:#ffc2c8;max-width:90vw;font-family:monospace;font-size:12px}</style>
+    <!-- Шрифты не блокируют показ: пока грузятся, видны системные. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Prata&display=swap&subset=cyrillic" media="print" onload="this.media='all'" />
+    <script>
+      // Ошибка загрузки показывается на заставке, а не пустым экраном.
+      window.addEventListener('error', function (e) {
+        var s = document.getElementById('splash');
+        if (!s) return;
+        var p = s.querySelector('pre') || s.appendChild(document.createElement('pre'));
+        p.textContent += (e.message || 'ошибка загрузки') + (e.filename ? ' @ ' + e.filename.split('/').pop() + ':' + e.lineno : '') + '\n';
+      }, true);
+    </script>
+    <script type="module" crossorigin src="./assets/index-v50Jba1y.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-BXFj5cQy.css">
+  </head>
+  <body>
+    <div id="splash"><b>Невестка</b><span>загружаем серию…</span></div>
+    <!-- Скрипт Telegram лежит рядом с игрой: telegram.org у части игроков в России без VPN не открывается,
+         а без этого скрипта Telegram держит белую заглушку. Обновлять: скачать заново в public/. -->
+    <script src="telegram-web-app.js"></script>
+    <!-- Сразу убираем заглушку Telegram: дальше видна наша заставка, пока грузится игра. -->
+    <script>try { window.Telegram.WebApp.ready() } catch (e) {}</script>
+    <div id="root"></div>
+  </body>
+</html>
